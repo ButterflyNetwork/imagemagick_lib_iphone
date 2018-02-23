@@ -7,7 +7,6 @@ im_compile() {
 	echo "[|- CP STATIC/DYLIB $BUILDINGFOR]"
 	cp $LIBPATH_core $LIB_DIR/$LIBNAME_core.$BUILDINGFOR
 	cp $LIBPATH_wand $LIB_DIR/$LIBNAME_wand.$BUILDINGFOR
-	cp $LIBPATH_magickpp $LIB_DIR/$LIBNAME_magickpp.$BUILDINGFOR
 	if [[ "$BUILDINGFOR" == "armv7s" ]]; then  # copy include and config files
 		# copy the wand/ + core/ headers
 		cp -r $IM_LIB_DIR/include/ImageMagick-*/magick/ $LIB_DIR/include/magick/
@@ -33,8 +32,6 @@ im () {
 	LIBNAME_core=`basename $LIBPATH_core`
 	LIBPATH_wand=$IM_LIB_DIR/lib/libMagickWand-7.Q8.a
 	LIBNAME_wand=`basename $LIBPATH_wand`
-	LIBPATH_magickpp=$IM_LIB_DIR/lib/libMagick++-6.Q8.a
-	LIBNAME_magickpp=`basename $LIBPATH_magickpp`
 
 	if [ "$1" == "arm64" ]; then
 		save
@@ -88,19 +85,6 @@ im () {
 		done
 		# combine the static libraries
 		try lipo $accumul -create -output $LIB_DIR/libMagickWand.a
-		echo "[+ DONE]"
-	fi
-
-	# join libMagick++
-	joinlibs=$(check_for_archs $LIB_DIR/$LIBNAME_magickpp)
-	if [ $joinlibs == "OK" ]; then
-		echo "[|- COMBINE $ARCHS]"
-		accumul=""
-		for i in $ARCHS; do
-			accumul="$accumul -arch $i $LIB_DIR/$LIBNAME_magickpp.$i"
-		done
-		# combine the static libraries
-		try lipo $accumul -create -output $LIB_DIR/libMagick++.a
 		echo "[+ DONE]"
 	fi
 }
