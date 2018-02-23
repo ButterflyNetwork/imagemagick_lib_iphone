@@ -1,12 +1,14 @@
 #!/bin/bash
 
 if [[ $# != 1 ]]; then
-	echo "$0 takes 1 argument: the version of ImageMagick you want to compile!"
-	echo "EXAMPLE: $0 6.8.8-2"
-	exit
+	export IM_VERSION="7.0.7-23"
+	echo "Using default version of ImageMagic ($IM_VERSION)."
+	echo "You can specify a version as a parameter. EXAMPLE: $0 6.8.8-2"
+else
+	export IM_VERSION="$1"
 fi
 
-export IM_VERSION="$1"
+
 
 # Configuration / Function scripts
 . $(dirname $0)/env.sh   # environment variables
