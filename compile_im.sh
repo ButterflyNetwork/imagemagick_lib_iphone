@@ -7,10 +7,11 @@ im_compile() {
 	echo "[|- CP STATIC/DYLIB $BUILDINGFOR]"
 	cp $LIBPATH_core $LIB_DIR/$LIBNAME_core.$BUILDINGFOR
 	cp $LIBPATH_wand $LIB_DIR/$LIBNAME_wand.$BUILDINGFOR
-	if [[ "$BUILDINGFOR" == "armv7s" ]]; then  # copy include and config files
+	if [[ "$BUILDINGFOR" == "arm64" ]]; then  # copy include and config files
+		echo "[|- CP INCLUDE - $BUILDINGFOR]"
 		# copy the wand/ + core/ headers
-		cp -r $IM_LIB_DIR/include/ImageMagick-$IM_MAJOR_VERSION/magick/ $LIB_DIR/include/magick/
-		cp -r $IM_LIB_DIR/include/ImageMagick-$IM_MAJOR_VERSION/wand/ $LIB_DIR/include/wand/
+		cp -r $IM_LIB_DIR/include/ImageMagick-$IM_MAJOR_VERSION/MagickCore/ $LIB_DIR/include/MagickCore/
+		cp -r $IM_LIB_DIR/include/ImageMagick-$IM_MAJOR_VERSION/MagickWand/ $LIB_DIR/include/MagickWand/
 
 		# copy configuration files needed for certain functions
 		cp -r $IM_LIB_DIR/etc/ImageMagick-$IM_MAJOR_VERSION/ $LIB_DIR/include/im_config/

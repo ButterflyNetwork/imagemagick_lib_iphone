@@ -20,7 +20,7 @@ prepare() {
 		echo "[INFO] need to copy crt_externals.h for compilation, please enter sudo password"
 		sudo ln -s "$SIMSDKROOT/usr/include/crt_externs.h" "$IOSSDKROOT/usr/include/crt_externs.h"
 	fi
-	
+
 	# Check if IMDelegates is inside the IM directory or link it
 	if [ -e $IM_DELEGATES_DIR ]; then
 		:;
@@ -34,8 +34,8 @@ prepare() {
 	# includes
 	mkdir -p $LIB_DIR/include/im_config
 	mkdir -p $LIB_DIR/include/png
-	mkdir -p $LIB_DIR/include/magick
-	mkdir -p $LIB_DIR/include/wand
+	mkdir -p $LIB_DIR/include/MagickCore
+	mkdir -p $LIB_DIR/include/MagickWand
 	# lib directories
 	mkdir -p $PNG_LIB_DIR
 	# DYLIB directories
