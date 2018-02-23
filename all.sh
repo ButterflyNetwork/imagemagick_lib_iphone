@@ -8,7 +8,8 @@ else
 	export IM_VERSION="$1"
 fi
 
-
+IM_MAJOR_VERSION=$(echo $IM_VERSION | awk -F'.' '{print $1}')
+echo "Major Verison: $IM_MAJOR_VERSION"
 
 # Configuration / Function scripts
 . $(dirname $0)/env.sh   # environment variables

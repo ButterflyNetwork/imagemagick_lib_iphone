@@ -9,14 +9,12 @@ im_compile() {
 	cp $LIBPATH_wand $LIB_DIR/$LIBNAME_wand.$BUILDINGFOR
 	if [[ "$BUILDINGFOR" == "armv7s" ]]; then  # copy include and config files
 		# copy the wand/ + core/ headers
-		cp -r $IM_LIB_DIR/include/ImageMagick-*/magick/ $LIB_DIR/include/magick/
-		cp -r $IM_LIB_DIR/include/ImageMagick-*/wand/ $LIB_DIR/include/wand/
-		cp -r $IM_LIB_DIR/include/ImageMagick-*/magick++/ $LIB_DIR/include/magick++/
-		cp -r $IM_LIB_DIR/include/ImageMagick-*/Magick++.h $LIB_DIR/include/Magick++.h
+		cp -r $IM_LIB_DIR/include/ImageMagick-$IM_MAJOR_VERSION/magick/ $LIB_DIR/include/magick/
+		cp -r $IM_LIB_DIR/include/ImageMagick-$IM_MAJOR_VERSION/wand/ $LIB_DIR/include/wand/
 
 		# copy configuration files needed for certain functions
-		cp -r $IM_LIB_DIR/etc/ImageMagick-*/ $LIB_DIR/include/im_config/
-		cp -r $IM_LIB_DIR/share/ImageMagick-*/ $LIB_DIR/include/im_config/
+		cp -r $IM_LIB_DIR/etc/ImageMagick-$IM_MAJOR_VERSION/ $LIB_DIR/include/im_config/
+		cp -r $IM_LIB_DIR/share/ImageMagick-$IM_MAJOR_VERSION/ $LIB_DIR/include/im_config/
 	fi
 	echo "[|- CLEAN $BUILDINGFOR]"
 	try make distclean
@@ -28,9 +26,9 @@ im () {
 
 	# static library that will be generated
 
-	LIBPATH_core=$IM_LIB_DIR/lib/libMagickCore-7.Q8.a
+	LIBPATH_core=$IM_LIB_DIR/lib/libMagickCore-$IM_MAJOR_VERSION.Q8.a
 	LIBNAME_core=`basename $LIBPATH_core`
-	LIBPATH_wand=$IM_LIB_DIR/lib/libMagickWand-7.Q8.a
+	LIBPATH_wand=$IM_LIB_DIR/lib/libMagickWand-$IM_MAJOR_VERSION.Q8.a
 	LIBNAME_wand=`basename $LIBPATH_wand`
 
 	if [ "$1" == "arm64" ]; then
