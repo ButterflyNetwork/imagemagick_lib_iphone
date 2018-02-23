@@ -40,8 +40,6 @@ prepare
 
 for i in $ARCHS; do
 	png $i
-	jpeg $i
-	tiff $i
 	im $i
 done
 

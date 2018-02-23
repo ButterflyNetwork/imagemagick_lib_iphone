@@ -26,7 +26,7 @@ im_compile() {
 im () {
 	echo "[+ IM: $1]"
 	cd $IM_DIR
-	
+
 	# static library that will be generated
 	LIBPATH_core=$IM_LIB_DIR/lib/libMagickCore-6.Q8.a
 	LIBNAME_core=`basename $LIBPATH_core`
@@ -34,25 +34,25 @@ im () {
 	LIBNAME_wand=`basename $LIBPATH_wand`
 	LIBPATH_magickpp=$IM_LIB_DIR/lib/libMagick++-6.Q8.a
 	LIBNAME_magickpp=`basename $LIBPATH_magickpp`
-	
-	if [ "$1" == "armv7" ] || [ "$1" == "armv7s" ] || [ "$1" == "arm64" ]; then
+
+	if [ "$1" == "arm64" ]; then
 		save
 		armflags $1
 		export CC="$(xcode-select -print-path)/usr/bin/gcc" # override clang
-		export CPPFLAGS="-I$LIB_DIR/include/jpeg -I$LIB_DIR/include/png -I$LIB_DIR/include/tiff"
+		export CPPFLAGS="-I$LIB_DIR/include/png"
 		export CFLAGS="$CFLAGS -DTARGET_OS_IPHONE"
-		export LDFLAGS="$LDFLAGS -L$LIB_DIR/jpeg_${BUILDINGFOR}_dylib/ -L$LIB_DIR/png_${BUILDINGFOR}_dylib/ -L$LIB_DIR/tiff_${BUILDINGFOR}_dylib/ -L$LIB_DIR"
+		export LDFLAGS="$LDFLAGS -L$LIB_DIR/png_${BUILDINGFOR}_dylib/ -L$LIB_DIR"
 		echo "[|- CONFIG $BUILDINGFOR]"
 		try ./configure prefix=$IM_LIB_DIR --host=arm-apple-darwin \
 			--disable-opencl --disable-largefile --with-quantum-depth=8 --with-magick-plus-plus \
-			--without-perl --without-x --disable-shared --disable-openmp --without-bzlib --without-freetype 
+			--without-perl --without-x --disable-shared --disable-openmp --without-bzlib --without-freetype
 		im_compile
 		restore
-	elif [ "$1" == "i386" ] || [ "$1" == "x86_64" ]; then
+	elif [ "$1" == "x86_64" ]; then
 		save
 		intelflags $1
-		export CPPFLAGS="$CPPFLAGS -I$LIB_DIR/include/jpeg -I$LIB_DIR/include/png -I$LIB_DIR/include/tiff -I$SIMSDKROOT/usr/include"
-		export LDFLAGS="$LDFLAGS -L$LIB_DIR/jpeg_${BUILDINGFOR}_dylib/ -L$LIB_DIR/png_${BUILDINGFOR}_dylib/ -L$LIB_DIR/tiff_${BUILDINGFOR}_dylib/ -L$LIB_DIR"
+		export CPPFLAGS="$CPPFLAGS -I$LIB_DIR/include/png -I$SIMSDKROOT/usr/include"
+		export LDFLAGS="$LDFLAGS -L$LIB_DIR/png_${BUILDINGFOR}_dylib/ -L$LIB_DIR"
 		echo "[|- CONFIG $BUILDINGFOR]"
 		try ./configure prefix=$IM_LIB_DIR --host=${BUILDINGFOR}-apple-darwin --disable-opencl \
 			--disable-largefile --with-quantum-depth=8 --with-magick-plus-plus --without-perl --without-x \
@@ -62,7 +62,7 @@ im () {
 	else
 		echo "[ERR: Nothing to do for $1]"
 	fi
-	
+
 	# join libMagickCore
 	joinlibs=$(check_for_archs $LIB_DIR/$LIBNAME_core)
 	if [ $joinlibs == "OK" ]; then
