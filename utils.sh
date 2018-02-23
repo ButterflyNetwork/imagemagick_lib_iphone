@@ -28,22 +28,18 @@ prepare() {
 		echo "[INFO] IMDelegates not found, linking it"
 		ln -s "$BUILDROOT/IMDelegates" "$IM_DIR/IMDelegates"
 	fi
-	
+
 	# target folder
 	mkdir -p $TARGET_LIB_DIR
 	# includes
 	mkdir -p $LIB_DIR/include/im_config
-	mkdir -p $LIB_DIR/include/jpeg
-	mkdir -p $LIB_DIR/include/magick
 	mkdir -p $LIB_DIR/include/png
-	mkdir -p $LIB_DIR/include/tiff
+	mkdir -p $LIB_DIR/include/magick
 	mkdir -p $LIB_DIR/include/wand
 	# lib directories
-	mkdir -p $JPEG_LIB_DIR
 	mkdir -p $PNG_LIB_DIR
-	mkdir -p $TIFF_LIB_DIR
 	# DYLIB directories
-	for i in "jpeg" "png" "tiff"; do
+	for i in "png"; do
 		for j in $ARCHS; do
 			mkdir -p $LIB_DIR/${i}_${j}_dylib
 		done
