@@ -28,9 +28,10 @@ im () {
 	cd $IM_DIR
 
 	# static library that will be generated
-	LIBPATH_core=$IM_LIB_DIR/lib/libMagickCore-6.Q8.a
+
+	LIBPATH_core=$IM_LIB_DIR/lib/libMagickCore-7.Q8.a
 	LIBNAME_core=`basename $LIBPATH_core`
-	LIBPATH_wand=$IM_LIB_DIR/lib/libMagickWand-6.Q8.a
+	LIBPATH_wand=$IM_LIB_DIR/lib/libMagickWand-7.Q8.a
 	LIBNAME_wand=`basename $LIBPATH_wand`
 	LIBPATH_magickpp=$IM_LIB_DIR/lib/libMagick++-6.Q8.a
 	LIBNAME_magickpp=`basename $LIBPATH_magickpp`
