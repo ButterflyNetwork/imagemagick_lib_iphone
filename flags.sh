@@ -19,7 +19,7 @@ armflags () {
 	
 	export ARM_CFLAGS="$ARM_CFLAGS -O3"
 	# uncomment this line if you want debugging stuff
-	# export ARM_CFLAGS="$ARM_CFLAGS -O0 -g"
+	export ARM_CFLAGS="$ARM_CFLAGS -O0 -g"
 
 	# apply ARM_XX values
 	export CC="$ARM_CC"
