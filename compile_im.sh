@@ -44,7 +44,7 @@ im () {
 			--disable-largefile --with-quantum-depth=8 \
 			--without-perl --without-x --disable-shared --disable-openmp --without-bzlib --without-freetype \
 			--enable-hdri=no --with-fontconfig=no --with-gvc=no --with-lcms=no --with-lzma=no --with-magick-plus-plus=no --with-openjp2=no --with-pango=no --with-webp=no --with-xml=no --with-zlib=no --with-fftw=no \
-			--with-tiff=no --with-jpeg=no
+			--with-tiff=no --with-jpeg=no --with-png=yes
 		im_compile
 		restore
 	elif [ "$1" == "x86_64" ]; then
@@ -57,7 +57,7 @@ im () {
 		--disable-largefile --with-quantum-depth=8 \
 		--without-perl --without-x --disable-shared --disable-openmp --without-bzlib --without-freetype \
 		--enable-hdri=no --with-fontconfig=no --with-gvc=no --with-lcms=no --with-lzma=no --with-magick-plus-plus=no --with-openjp2=no --with-pango=no --with-webp=no --with-xml=no --with-zlib=no --with-fftw=no \
-		--with-tiff=no --with-jpeg=no
+		--with-tiff=no --with-jpeg=no --with-png=yes
 		im_compile
 		restore
 	else
